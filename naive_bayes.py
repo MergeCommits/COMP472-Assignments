@@ -21,7 +21,7 @@ def naive_bayes(x_train: list,
 
     with open("nb-reviews.txt", 'w') as f:
         import sys
-        # sys.stdout = f  # Change the standard output to the file we created.
+        sys.stdout = f  # Change the standard output to the file we created.
         ml_model = train_model(x_train, y_train, naive_bayes_pipeline)
         predicted_labels = predict_eval_data(x_test, ml_model)
 

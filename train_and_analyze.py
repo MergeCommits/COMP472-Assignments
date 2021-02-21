@@ -35,9 +35,9 @@ def print_to_file(head, report, confusion, wrong_examples, row_predictions, extr
     text_to_write += "\n\n\nConfusion Matrix: \n\n{}".format(confusion)
     text_to_write += "\n\n\nWrong Prediction Examples: \n\n" + wrong_examples
 
-    text_to_write += "\n\n\nAll predictions: \n\n" + row_predictions
-
     if extra:
         text_to_write += "\n\n\nGenerated Decision Tree: \n\n" + extra
+
+    text_to_write += "\n\n\nAll predictions: \n\n" + row_predictions
 
     print(text_to_write)

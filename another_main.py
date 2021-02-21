@@ -6,6 +6,8 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.tree import DecisionTreeClassifier
 
+from base_tree import base_decision_tree
+from best_tree import best_decision_tree
 from naive_bayes import naive_bayes
 
 SPLIT_PERCENT = 0.8
@@ -44,37 +46,23 @@ def main():
 
     all_labels = get_labels(train_labels)
 
-    base_dt_pipeline = Pipeline([
-        ('vec', CountVectorizer()),
-        ('tfidf', TfidfTransformer()),
-        ('clf', DecisionTreeClassifier(criterion="entropy", splitter="random")),
-    ])
-
-    best_dt_pipeline = Pipeline([
-        ('vec', CountVectorizer()),
-        ('tfidf', TfidfTransformer()),
-        ('clf', DecisionTreeClassifier(criterion="entropy", splitter="best"))
-    ])
-
     naive_bayes(train_docs,
                 train_labels,
                 eval_docs,
                 eval_labels,
                 all_labels)
 
-    # run_train_and_analyze(base_dt_pipeline,
-    #                       train_docs,
-    #                       train_labels,
-    #                       eval_docs,
-    #                       eval_labels,
-    #                       "basedt-reviews.txt")
-    #
-    # run_train_and_analyze(best_dt_pipeline,
-    #                       train_docs,
-    #                       train_labels,
-    #                       eval_docs,
-    #                       eval_labels,
-    #                       "bestdt-reviews.txt")
+    base_decision_tree(train_docs,
+                       train_labels,
+                       eval_docs,
+                       eval_labels,
+                       all_labels)
+
+    best_decision_tree(train_docs,
+                       train_labels,
+                       eval_docs,
+                       eval_labels,
+                       all_labels)
 
 
 main()
