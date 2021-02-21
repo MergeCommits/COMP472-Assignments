@@ -2,10 +2,6 @@ from __future__ import division
 
 from codecs import open
 
-from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
-from sklearn.pipeline import Pipeline
-from sklearn.tree import DecisionTreeClassifier
-
 from base_tree import base_decision_tree
 from best_tree import best_decision_tree
 from naive_bayes import naive_bayes
