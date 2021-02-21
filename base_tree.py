@@ -13,7 +13,7 @@ def base_decision_tree(x_train: list,
                        y_truth: list,
                        all_labels: list,
                        best_parameters=False):
-    dt_clf = DecisionTreeClassifier(criterion="gini", splitter="best", min_impurity_decrease=0.0005) if best_parameters else DecisionTreeClassifier(criterion="entropy", splitter="random")
+    dt_clf = DecisionTreeClassifier(criterion="entropy", splitter="random") if best_parameters else DecisionTreeClassifier(criterion="entropy")
 
     base_dt_pipeline = Pipeline([
         ('vec', CountVectorizer()),
