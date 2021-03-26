@@ -1,64 +1,71 @@
-from __future__ import division
+from typing import List
 
-from codecs import open
-
-from base_tree import base_decision_tree
-from best_tree import best_decision_tree
-from naive_bayes import naive_bayes
-
-SPLIT_PERCENT = 0.8
-DOCUMENT_NAME = "all_sentiment_shuffled.txt"
+from Puzzle import Puzzle
+from PuzzleNode import PuzzleNode
 
 
-def read_documents(doc_file):
-    docs = []
-    labels = []
-    with open(doc_file, encoding='utf-8') as f:
-        for line in f:
-            separation = line.split(' ', 3)
-            labels.append(separation[1])
-            docs.append(separation[3])
-    return docs, labels
+def run_search(puzzle: Puzzle, algo):
+    algo(puzzle)
 
 
-def get_labels(labels):
-    label_list = []
-    for label in labels:
-        if label not in label_list:
-            label_list.append(label)
+def was_visited(node: Puzzle, visited: List[Puzzle]) -> bool:
+    for visit in visited:
+        if node.equals(visit):
+            return True
 
-    return label_list
+    return False
+
+
+def dfs_search(puzzle: Puzzle):
+    visited: List[Puzzle] = []
+    stack: List[Puzzle] = [puzzle]
+
+    tree_root: PuzzleNode = PuzzleNode(puzzle)
+
+    while len(stack) > 0:
+        node = stack.pop(0)
+
+        # Have we visited this node before.
+        if was_visited(node, visited):
+            continue
+
+        if not node.is_solved():
+            permutes = node.get_permutations()
+            stack = stack + permutes
+            visited.append(node)
+
+            current_node = tree_root.search_for_node(node)
+            for permutation in permutes:
+                new_node = PuzzleNode(permutation)
+                new_node.parent = current_node
+                current_node.children.append(new_node)
+        else:
+            this_node = tree_root.search_for_node(node)
+            while True:
+                this_node.what_am_i.smart_print()
+                print()
+                this_node = this_node.parent
+                if this_node is None:
+                    break
+            break
 
 
 def main():
-    all_docs, all_labels = read_documents(DOCUMENT_NAME)
-    split_point = int(SPLIT_PERCENT * len(all_docs))
+    puz = Puzzle('((4; 3); (2; 1))')
+    # puz = Puzzle('((6; 1; 2); (7; 8; 3); (5; 4; 9))')
+    # puz = Puzzle('((1; 2; 3; 4); (5; 6; 7; 8); (9; 10; 11; 12); (13; 14; 15; 16))')
+    # puz_list = puz.get_permutations()
+    # for puzzle in puz_list:
+    #     # print(puzzle)
+    #     puzzle.smart_print()
+    #     print()
 
-    train_docs = all_docs[:split_point]
-    train_labels = all_labels[:split_point]
+    # puz2 = Puzzle('((1; 2; 3); (4; 5; 6); (7; 8; 9))')
+    # print(puz.equals(puz2))
 
-    eval_docs = all_docs[split_point:]
-    eval_labels = all_labels[split_point:]
+    # print(Puzzle('((1; 2; 3; 4); (5; 6; 7; 8); (9; 10; 11; 12); (13; 14; 15; 16))').is_solved())
 
-    all_labels = get_labels(train_labels)
-
-    naive_bayes(train_docs,
-                train_labels,
-                eval_docs,
-                eval_labels,
-                all_labels)
-
-    base_decision_tree(train_docs,
-                       train_labels,
-                       eval_docs,
-                       eval_labels,
-                       all_labels)
-
-    best_decision_tree(train_docs,
-                       train_labels,
-                       eval_docs,
-                       eval_labels,
-                       all_labels)
+    run_search(puz, dfs_search)
 
 
 main()
