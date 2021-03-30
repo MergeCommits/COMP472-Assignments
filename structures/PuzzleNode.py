@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import List, Optional
 
-from Puzzle import Puzzle
+from structures.Puzzle import Puzzle
 
 
 class PuzzleNode:
@@ -28,3 +28,28 @@ class PuzzleNode:
                         return ret_val
 
                 return None
+
+    def how_deep(self) -> int:
+        if self.parent is None:
+            return 0
+        else:
+            total_deepness = 1
+            current_node = self.parent
+            while current_node.parent is not None:
+                total_deepness += 1
+                current_node = current_node.parent
+
+            return total_deepness
+
+    def to_travel_list(self) -> List[PuzzleNode]:
+        return_list: List[PuzzleNode] = []
+        current_node = self
+
+        while True:
+            return_list.append(current_node)
+            current_node = current_node.parent
+            if current_node is None:
+                break
+
+        return_list.reverse()
+        return return_list
