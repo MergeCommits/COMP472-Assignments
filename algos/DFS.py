@@ -38,5 +38,5 @@ def dfs_search(puzzle: Puzzle, queue: Queue):
                 current_node.children.append(new_node)
         else:
             tree_node = tree_root.search_for_node(node)
-            queue.put((tree_node, visited))
+            queue.put((tree_node.to_travel_list(), visited))
             break

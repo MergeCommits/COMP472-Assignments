@@ -7,7 +7,7 @@ from structures.PuzzleNode import PuzzleNode
 MAX_TIMEOUT = 60
 
 
-def perform_run(puzzle: Puzzle, algo_function) -> Optional[Tuple[PuzzleNode, List[Puzzle]]]:
+def perform_run(puzzle: Puzzle, algo_function) -> Optional[Tuple[List[PuzzleNode], List[Puzzle]]]:
     pro_queue = multiprocessing.Queue()
     p = multiprocessing.Process(target=algo_function, name="algo", args=(puzzle, pro_queue))
     p.start()
@@ -35,13 +35,13 @@ def write_to_file(puzzle: Puzzle, algo_function, filename: str):
             return
 
         print("GOAL PATH:")
-        goal_path = return_tuple[0].to_travel_list()
+        goal_path = return_tuple[0]
         for element in goal_path:
-            print(element.what_am_i.smart_print())
+            element.what_am_i.smart_print()
             print()
 
         print("SEARCH PATH:")
         visit_path = return_tuple[1]
         for element in visit_path:
-            print(element.smart_print())
+            element.smart_print()
             print()

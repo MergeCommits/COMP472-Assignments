@@ -43,7 +43,9 @@ class Puzzle:
 
         for index in range(0, self.dim):
             puz_copy = copy.deepcopy(self)
-            puz_copy.matrix[row_index][index], puz_copy.matrix[row_index + 1][index] = puz_copy.matrix[row_index + 1][index], puz_copy.matrix[row_index][index]
+            puz_copy.matrix[row_index][index], puz_copy.matrix[row_index + 1][index] = puz_copy.matrix[row_index + 1][
+                                                                                           index], \
+                                                                                       puz_copy.matrix[row_index][index]
             permutes.append(puz_copy)
 
         return permutes
@@ -98,3 +100,16 @@ class Puzzle:
             for c in r:
                 print(c, end=" ")
             print()
+
+    def how_many_incorrect_position(self) -> int:
+        incorrect_count = 0
+        n = self.dim * self.dim
+
+        for i in range(0, n):
+            x = i // self.dim
+            y = i % self.dim
+
+            if self.matrix[x][y] != (i + 1):
+                incorrect_count += 1
+
+        return incorrect_count

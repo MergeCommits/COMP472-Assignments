@@ -1,12 +1,12 @@
 import heapq
 from typing import Tuple, List
 
-from PuzzleNode import PuzzleNode
+from structures.PuzzleNode import PuzzleNode
 
 
 class PriorityQueue:
     def __init__(self):
-        self.elements: List[Tuple[float, PuzzleNode]] = []
+        self.elements: List[Tuple[int, PuzzleNode]] = []
 
     def empty(self) -> bool:
         return not self.elements

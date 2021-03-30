@@ -53,3 +53,10 @@ class PuzzleNode:
 
         return_list.reverse()
         return return_list
+
+    def __eq__(self, other):
+        return 1
+
+    def __hash__(self):
+        return hash(self.what_am_i)
+

@@ -32,7 +32,7 @@ def dfs_max_depth_search(puzzle: Puzzle, max_depth: int, queue: Queue) -> Option
                     current_node.children.append(new_node)
         else:
             this_node = tree_root.search_for_node(node)
-            queue.put((this_node, visited))
+            queue.put((this_node.to_travel_list(), visited))
             return this_node
 
     return None

@@ -1,5 +1,6 @@
 import multiprocessing
 
+from algos.AStar import atar_incorrect_position_heuristic
 from algos.DFS import dfs_search
 from algos.ID import id_search
 from analysis.Analysis import write_to_file
@@ -29,12 +30,17 @@ def main():
     # run_search(puz, id_search)
 
     if __name__ == '__main__':
-        p1 = multiprocessing.Process(target=write_to_file, name="algo", args=(puz, dfs_search, "dfs.txt"))
+        p1 = multiprocessing.Process(target=write_to_file, name="dfs", args=(puz, dfs_search, "dfs.txt"))
         p1.start()
-        p2 = multiprocessing.Process(target=write_to_file, name="algo", args=(puz, id_search, "id.txt"))
+        p2 = multiprocessing.Process(target=write_to_file, name="id", args=(puz, id_search, "id.txt"))
         p2.start()
+        p3 = multiprocessing.Process(target=write_to_file, name="astar1", args=(puz, atar_incorrect_position_heuristic, "astar1.txt"))
+        p3.start()
+
         p1.join()
         p2.join()
+        p3.join()
+        # write_to_file(puz, atar_incorrect_position_heuristic, "astar1.txt")
         # write_to_file(puz, dfs_search, "dfs.txt")
         # write_to_file(puz, id_search, "id.txt")
 
