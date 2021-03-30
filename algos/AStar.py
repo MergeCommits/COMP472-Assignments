@@ -44,7 +44,7 @@ def a_star_search(puzzle: Puzzle, heuristic, queue: Queue):
     goal_path: List[PuzzleNode] = []
     current = goal
     while not current.what_am_i.equals(start.what_am_i):
-        if not current in came_from:
+        if current not in came_from:
             goal_path = []
         goal_path.append(current)
         current = came_from[current]
@@ -56,8 +56,16 @@ def a_star_search(puzzle: Puzzle, heuristic, queue: Queue):
 
 
 def many_slots_in_correct_place_heuristic(state: PuzzleNode) -> int:
-    return state.what_am_i.how_many_incorrect_position()
+    return state.what_am_i.how_many_incorrect_positions()
 
 
 def atar_incorrect_position_heuristic(puzzle: Puzzle, queue: Queue):
     a_star_search(puzzle, many_slots_in_correct_place_heuristic, queue)
+
+
+def distance_to_incorrect_heuristic(state: PuzzleNode) -> int:
+    return state.what_am_i.how_far_from_correct_positions()
+
+
+def atar_distance_to_incorrect(puzzle: Puzzle, queue: Queue):
+    a_star_search(puzzle, distance_to_incorrect_heuristic, queue)

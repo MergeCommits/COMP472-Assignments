@@ -86,6 +86,36 @@ class Puzzle:
 
         return True
 
+    def how_many_incorrect_positions(self) -> int:
+        incorrect_count = 0
+        n = self.dim * self.dim
+
+        for i in range(0, n):
+            x = i // self.dim
+            y = i % self.dim
+
+            if self.matrix[x][y] != (i + 1):
+                incorrect_count += 1
+
+        return incorrect_count
+
+    def how_far_from_correct_positions(self) -> int:
+        incorrect_size = 0
+        n = self.dim * self.dim
+
+        for i in range(0, n):
+            x = i // self.dim
+            y = i % self.dim
+
+            if self.matrix[x][y] != (i + 1):
+                number = self.matrix[x][y] - 1
+                true_y = (number % self.dim)
+                true_x = (number - true_y) // self.dim
+                incorrect_size += abs(x - true_x) + abs(y - true_y)
+
+        incorrect_size //= 2
+        return incorrect_size
+
     def __str__(self) -> str:
         return_rows = []
 
@@ -100,16 +130,3 @@ class Puzzle:
             for c in r:
                 print(c, end=" ")
             print()
-
-    def how_many_incorrect_position(self) -> int:
-        incorrect_count = 0
-        n = self.dim * self.dim
-
-        for i in range(0, n):
-            x = i // self.dim
-            y = i % self.dim
-
-            if self.matrix[x][y] != (i + 1):
-                incorrect_count += 1
-
-        return incorrect_count

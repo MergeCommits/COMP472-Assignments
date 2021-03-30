@@ -26,7 +26,7 @@ def perform_run(puzzle: Puzzle, algo_function) -> Optional[Tuple[List[PuzzleNode
 def write_to_file(puzzle: Puzzle, algo_function, filename: str):
     with open(filename, 'w') as f:
         import sys
-        # sys.stdout = f  # Change the standard output to the file we created.
+        sys.stdout = f  # Change the standard output to the file we created.
 
         return_tuple = perform_run(puzzle, algo_function)
 
