@@ -1,7 +1,7 @@
 from multiprocessing import Queue
+from queue import PriorityQueue
 from typing import Dict, Optional, List
 
-from structures.PriorityQueue import PriorityQueue
 from structures.Puzzle import Puzzle
 from structures.PuzzleNode import PuzzleNode
 
@@ -12,14 +12,14 @@ def a_star_search(puzzle: Puzzle, heuristic, queue: Queue):
 
     visited: List[Puzzle] = []
     frontier = PriorityQueue()
-    frontier.put(start, 0)
+    frontier.put((0, start))
     came_from: Dict[PuzzleNode, Optional[PuzzleNode]] = {}
     cost_so_far: Dict[PuzzleNode, int] = {}
     came_from[start] = None
     cost_so_far[start] = 0
 
     while not frontier.empty():
-        current: PuzzleNode = frontier.get()
+        current: PuzzleNode = frontier.get()[1]
         visited.append(current.what_am_i)
 
         if current.what_am_i.is_solved():
@@ -38,7 +38,7 @@ def a_star_search(puzzle: Puzzle, heuristic, queue: Queue):
             if nei not in cost_so_far or new_cost < cost_so_far[nei]:
                 cost_so_far[nei] = new_cost
                 priority = new_cost + heuristic(nei)
-                frontier.put(nei, priority)
+                frontier.put((priority, nei))
                 came_from[nei] = current
 
     goal_path: List[PuzzleNode] = []
