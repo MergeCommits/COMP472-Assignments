@@ -1,6 +1,8 @@
+import time
 from multiprocessing import Queue
-from typing import List
+from typing import List, Optional, Tuple
 
+from analysis.Analysis import MAX_TIMEOUT
 from structures.Puzzle import Puzzle
 from structures.PuzzleNode import PuzzleNode
 
@@ -13,13 +15,18 @@ def was_visited(node: Puzzle, visited: List[Puzzle]) -> bool:
     return False
 
 
-def dfs_search(puzzle: Puzzle, queue: Queue):
+def dfs_search(puzzle: Puzzle) -> Optional[Tuple[List[PuzzleNode], List[Puzzle], float]]:
     visited: List[Puzzle] = []
     stack: List[Puzzle] = [puzzle]
 
     tree_root: PuzzleNode = PuzzleNode(puzzle)
 
+    timeout = time.time() + MAX_TIMEOUT
+
     while len(stack) > 0:
+        if time.time() > timeout:
+            return None
+
         node = stack.pop(0)
 
         # Have we visited this node before.
@@ -37,6 +44,8 @@ def dfs_search(puzzle: Puzzle, queue: Queue):
                 new_node.parent = current_node
                 current_node.children.append(new_node)
         else:
+            elapsed_time = time.time() - (timeout - MAX_TIMEOUT)
+
             tree_node = tree_root.search_for_node(node)
-            queue.put((tree_node.to_travel_list(), visited))
-            break
+            print("FINISH")
+            return tree_node.to_travel_list(), visited, elapsed_time
