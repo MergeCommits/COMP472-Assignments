@@ -37,7 +37,6 @@ def dfs_max_depth_search(puzzle: Puzzle, max_depth: int, timeout: float) -> Opti
                     current_node.children.append(new_node)
         else:
             this_node = tree_root.search_for_node(node)
-            print("FINISH")
             return this_node.to_travel_list(), visited
 
     return None

@@ -59,8 +59,12 @@ def analyze_20_runs(puzzles: List[Puzzle], algo_function, name: str):
             elapsed_time = result[2]
             total_time += elapsed_time
 
-    avg_goal_path_length = total_goal_path_length / total_runs
-    avg_search_path_length = total_search_path_length / total_runs
+    total_solutions = total_runs - total_no_solutions
+    if total_solutions == 0:
+        total_solutions = 1
+
+    avg_goal_path_length = total_goal_path_length / total_solutions
+    avg_search_path_length = total_search_path_length / total_solutions
     avg_time = total_time / total_runs
 
     print(name)

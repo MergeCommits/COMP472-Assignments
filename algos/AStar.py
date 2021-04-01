@@ -85,7 +85,6 @@ def a_star_search(puzzle: Puzzle, heuristic) -> Optional[Tuple[List[PuzzleNode],
 
         if not was_visited(current.what_am_i, visited):
             visited.append(current.what_am_i)
-            # print("ALREADY")
 
         if current.what_am_i.is_solved():
             goal = current
@@ -99,16 +98,11 @@ def a_star_search(puzzle: Puzzle, heuristic) -> Optional[Tuple[List[PuzzleNode],
             current.children.append(new_node)
 
         for nei in current.children:
-            # new_cost = cost_so_far[current] + 1
             new_cost = get_from_cost_so_far(current, cost_so_far) + 1
-            # print(inside_cost_so_far(nei, cost_so_far))
-            # if (not inside_cost_so_far(nei, cost_so_far)) or new_cost < cost_so_far[nei]:
             if (not inside_cost_so_far(nei, cost_so_far)) or has_cost_and_is_less_than(nei, new_cost, cost_so_far):
-                # cost_so_far[nei] = new_cost
                 add_to_cost_so_far(nei, new_cost, cost_so_far)
                 priority = new_cost + heuristic(nei)
                 frontier.put((priority, nei))
-                # came_from[nei] = current
                 update_came_from(nei, current, came_from)
 
     elapsed_time = time.time() - (timeout - MAX_TIMEOUT)

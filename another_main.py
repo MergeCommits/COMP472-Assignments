@@ -17,8 +17,7 @@ def run_search(puzzle: Puzzle, algo):
 
 def standard_run():
     if __name__ == '__main__':
-        # puz = Puzzle('((3; 1; 2); (7; 6; 8); (5; 4; 9))')
-        puz = Puzzle('((9; 7; 1); (5; 6; 2); (4; 8; 3))')
+        puz = Puzzle('((8; 3; 4); (6; 2; 5); (7; 1; 9))')
         # puz = Puzzle('((9; 12; 1; 3); (14; 11; 10; 8); (13; 6; 5; 15); (7; 2; 16; 4))')
 
         p1 = multiprocessing.Process(target=write_to_file, name="dfs", args=(puz, dfs_search, "dfs"))
@@ -87,8 +86,8 @@ def twenty_generate():
 
 
 def main():
-    # standard_run()
-    twenty_run()
+    standard_run()
+    # twenty_run()
     # twenty_generate()
 
 

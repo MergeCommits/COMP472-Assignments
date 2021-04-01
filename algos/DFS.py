@@ -47,5 +47,4 @@ def dfs_search(puzzle: Puzzle) -> Optional[Tuple[List[PuzzleNode], List[Puzzle],
             elapsed_time = time.time() - (timeout - MAX_TIMEOUT)
 
             tree_node = tree_root.search_for_node(node)
-            print("FINISH")
             return tree_node.to_travel_list(), visited, elapsed_time
