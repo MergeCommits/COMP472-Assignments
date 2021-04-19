@@ -154,7 +154,10 @@ def main():
     print(f"Number of Nodes Visited: {State.nodes_visited}")
     print(f"Number of Nodes Evaluated: {State.nodes_evaluated}")
     print(f"Max Depth Reached: {State.max_depth}")
-    avg_branch_factor = "{:.1f}".format(State.branch_count / State.subtree_count)
+    if State.subtree_count < 1:
+        avg_branch_factor = float(0)
+    else:
+        avg_branch_factor = "{:.1f}".format(State.branch_count / State.subtree_count)
     print(f"Avg Effective Branching Factor: {avg_branch_factor}")
 
 
