@@ -149,7 +149,8 @@ def main():
     result = alpha_beta_pruning(start_node, -math.inf, math.inf)
 
     print(f"Move: {result[1]}")
-    print(f"Value: {result[0]}")
+    value = "{:.1f}".format(result[0])
+    print(f"Value: {value}")
     print(f"Number of Nodes Visited: {State.nodes_visited}")
     print(f"Number of Nodes Evaluated: {State.nodes_evaluated}")
     print(f"Max Depth Reached: {State.max_depth}")
