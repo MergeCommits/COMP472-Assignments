@@ -1,16 +1,15 @@
 import sympy
 import math
 
-class State():
 
+class State:
     nodesVisited = 0
     nodesEvaluated = 0
     maxDepth = 0
     subtreeCount = 0
     branchCount = 0
 
-
-    def __init__(self, availableTokens, lastToken, currentPlayer, depth = -1):
+    def __init__(self, availableTokens, lastToken, currentPlayer, depth=-1):
         self.availableTokens = availableTokens
         self.lastToken = lastToken
         self.actions = None
@@ -34,31 +33,31 @@ class State():
         return f"Player {self.currentPlayer}'s turn: [{self.lastToken}] => {self.availableTokens}"
 
     def heuristic(self):
-        heuristic = 0
+        heuristic = float(0)
 
-        #Case: Dead end. Defeat.
+        # Case: Dead end. Defeat.
         if len(self.actions) == 0:
             heuristic = -1
 
-        #Case: 1 is still available to take.
+        # Case: 1 is still available to take.
         elif 1 in self.actions:
             heuristic = 0
 
-        #Case: 2 is the last picked token.
+        # Case: 2 is the last picked token.
         elif self.lastToken == 1:
             if len(self.availableTokens) % 2 == 1:
                 heuristic = 0.5
             else:
-                heristic = -0.5
+                heuristic = -0.5
 
-        #Case: 3 is not available, and last picked token is a prime.
+        # Case: 3 is not available, and last picked token is a prime.
         elif sympy.isprime(self.lastToken):
             if len(self.actions) % 2 == 1:
                 heuristic = 0.7
             else:
                 heuristic = -0.7
 
-        #Case: 4 is not available, and last picked token is a composite.
+        # Case: 4 is not available, and last picked token is a composite.
         else:
             largestPrime = 0
             for token in self.actions:
@@ -82,8 +81,7 @@ class State():
                 else:
                     heuristic = -0.6
 
-
-        #Flip if it's Min's turn.
+        # Flip if it's Min's turn.
         if self.currentPlayer == "Min":
             heuristic *= -1
 
@@ -105,7 +103,7 @@ class State():
 
         # If the input is not a fresh game.
         if turnNum > 0:
-            for i in parameters[2:2+turnNum]:
+            for i in parameters[2:2 + turnNum]:
                 self.availableTokens.remove(int(i))
 
             self.lastToken = int(parameters[-2])
@@ -115,7 +113,7 @@ class State():
         # If the input is a fresh game.
         else:
             self.actions = []
-            for i in range(1, math.ceil(tokenCount/2), 2):
+            for i in range(1, math.ceil(tokenCount / 2), 2):
                 self.actions.append(i)
 
         self.depth = int(parameters[-1])
@@ -140,9 +138,9 @@ class State():
         State.branchCount += count
 
 
-
 def main():
-    print("Input the state of the game: <amount of tokens> <turns elapsed> <tokens taken in order> <max depth evaluation>")
+    print(
+        "Input the state of the game: <amount of tokens> <turns elapsed> <tokens taken in order> <max depth evaluation>")
     stateInput = input()
 
     startNode = State(None, 0, "")
@@ -157,12 +155,11 @@ def main():
     print(f"Avg Effective Branching Factor: {State.branchCount / State.subtreeCount}")
 
 
-
 def alphaBetaPruning(state, alpha, beta, depth=0):
     if (State.maxDepth < depth):
         State.maxDepth = depth
 
-    print(f"{'    '*depth}{state}")
+    print(f"{'    ' * depth}{state}")
     if len(state.actions) == 0 or state.depth == 0:
         return [state.heuristic(), None]
 
@@ -174,8 +171,8 @@ def alphaBetaPruning(state, alpha, beta, depth=0):
         totalActionsExamined += 1
         changed = False
         childState = state.generateChild(action)
-        score = alphaBetaPruning(childState, alpha, beta, depth+1)[0]
-        print(f"{'    '*(depth+1)}{score}")
+        score = alphaBetaPruning(childState, alpha, beta, depth + 1)[0]
+        print(f"{'    ' * (depth + 1)}{score}")
         if bestScore is None:
             bestScore = score
             bestAction = action
@@ -210,9 +207,3 @@ def alphaBetaPruning(state, alpha, beta, depth=0):
 
 
 main()
-
-
-
-
-
-
