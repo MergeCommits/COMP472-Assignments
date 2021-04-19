@@ -37,11 +37,11 @@ class State:
 
         # Case: Dead end. Defeat.
         if len(self.actions) == 0:
-            heuristic = -1
+            heuristic = -1.0
 
         # Case: 1 is still available to take.
         elif 1 in self.actions:
-            heuristic = 0
+            heuristic = 0.0
 
         # Case: 2 is the last picked token.
         elif self.last_token == 1:
@@ -83,7 +83,7 @@ class State:
 
         # Flip if it's Min's turn.
         if self.current_player == "Min":
-            heuristic *= -1
+            heuristic *= -1.0
 
         State.nodes_evaluated += 1
 
