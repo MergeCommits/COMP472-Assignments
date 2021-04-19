@@ -6,6 +6,6 @@
 # How to run
 Open the command line and run
 
-    conda install sympi
+    conda install sympy
 
 Run the file `main.py`.
