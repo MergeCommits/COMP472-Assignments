@@ -140,7 +140,8 @@ class State:
 
 def main():
     print(
-        "Input the state of the game: <amount of tokens> <turns elapsed> <tokens taken in order> <max depth evaluation>")
+        "Input the state of the game: <amount of tokens> <turns elapsed> <tokens taken in order> <max depth evaluation>"
+    )
     state_input = input()
 
     start_node = State(None, 0, "")
@@ -152,7 +153,8 @@ def main():
     print(f"Number of Nodes Visited: {State.nodes_visited}")
     print(f"Number of Nodes Evaluated: {State.nodes_evaluated}")
     print(f"Max Depth Reached: {State.max_depth}")
-    print(f"Avg Effective Branching Factor: {State.branch_count / State.subtree_count}")
+    avg_branch_factor = "{:.1f}".format(State.branch_count / State.subtree_count)
+    print(f"Avg Effective Branching Factor: {avg_branch_factor}")
 
 
 def alpha_beta_pruning(state, alpha, beta, depth=0):
