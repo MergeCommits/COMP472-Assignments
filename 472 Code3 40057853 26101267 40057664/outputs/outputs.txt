@@ -1,0 +1,70 @@
+Move: 1
+Value: -1.0
+Number of Nodes Visited: 44
+Number of Nodes Evaluated: 17
+Max Depth Reached: 6
+Avg Effective Branching Factor: 1.6
+
+Move: 1
+Value: -1.0
+Number of Nodes Visited: 194
+Number of Nodes Evaluated: 73
+Max Depth Reached: 8
+Avg Effective Branching Factor: 1.6
+
+Move: 6
+Value: -1.0
+Number of Nodes Visited: 6
+Number of Nodes Evaluated: 3
+Max Depth Reached: 2
+Avg Effective Branching Factor: 1.7
+
+Move: 6
+Value: -1.0
+Number of Nodes Visited: 4
+Number of Nodes Evaluated: 2
+Max Depth Reached: 2
+Avg Effective Branching Factor: 1.5
+
+Move: 8
+Value: -1.0
+Number of Nodes Visited: 7
+Number of Nodes Evaluated: 3
+Max Depth Reached: 3
+Avg Effective Branching Factor: 1.5
+
+Move: 3
+Value: 1.0
+Number of Nodes Visited: 14477
+Number of Nodes Evaluated: 5094
+Max Depth Reached: 15
+Avg Effective Branching Factor: 1.5
+
+Move: 4
+Value: 1.0
+Number of Nodes Visited: 3
+Number of Nodes Evaluated: 2
+Max Depth Reached: 1
+Avg Effective Branching Factor: 2.0
+
+Move: 1
+Value: 1.0
+Number of Nodes Visited: 437
+Number of Nodes Evaluated: 186
+Max Depth Reached: 9
+Avg Effective Branching Factor: 1.7
+
+Move: 1
+Value: 1.0
+Number of Nodes Visited: 7
+Number of Nodes Evaluated: 5
+Max Depth Reached: 2
+Avg Effective Branching Factor: 3.0
+
+Move: 7
+Value: -0.5
+Number of Nodes Visited: 4717
+Number of Nodes Evaluated: 1894
+Max Depth Reached: 9
+Avg Effective Branching Factor: 1.7
+
