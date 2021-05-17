@@ -1,5 +1,3 @@
-https://github.com/QuaternionMark/COMP472-Uh
-
 # COMP472 - Assignment 3
 - Ghislain Clermont - 40057664
 - Mark Jarjour - 40057853
